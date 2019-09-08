@@ -18,7 +18,10 @@
 
         public function getPerfil($usuario) {
 
-            $sql = "SELECT ID FROM USUARIO WHERE IDENTIDADE = :idt and SENHA = :senha";
+            $sql = "SELECT P.ID, P.PERFIL FROM PERFIL P
+                    INNER JOIN PERFIL_SISTEMA PS ON P.ID = PS.PERFIL_ID
+                    INNER JOIN USUARIO_PERFIL UP ON UP.PERFIL_ID = P.ID
+                    WHERE UP.USUARIO_ID = :usuario_id AND PS.SISTEMA_ID = :sistema_id AND PS.ATIVO = 1";
             $exec = Conexao::prepare($sql);
             $exec->bindValue(':usuario_id', $usuario->id);
             $exec->bindValue(':sistema_id', $usuario->sistema_id);

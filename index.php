@@ -5,8 +5,6 @@
     require_once 'classes/Servicos.php';
     require_once 'classes/Usuarios.php';
 
-//    $json = (isset(file_get_contents('php://input'))) ? file_get_contents('php://input') : '';
-
     class Rest {
 
         public static function open($requisicao) {
@@ -20,10 +18,7 @@
             array_shift($url);
 
             $json = file_get_contents('php://input');
-//            $parametros = array();
             $parametros = isset($json) ? json_decode($json) : '';
-//            print_r($parametros);
-//            die();
 
             try {
                 if (class_exists($classe)) {
