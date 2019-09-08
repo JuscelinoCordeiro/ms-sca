@@ -1,23 +1,26 @@
 <?php
 
-    class Servicos {
+    require_once './conexao/Conexao.php';
+
+    class Servicos extends Conexao {
 
         public function mostrar($parametros) {
-            $con = new PDO('mysql: host=locahost; dbname=netcar_sla;', 'dimitri', '@!@#rf');
 
-            if (!empty($parametros)) {
-                $sql = "SELECT * FROM servico where cd_servico =  " . $parametros;
-            } else {
-                $sql = "SELECT * FROM servico ORDER BY cd_servico ASC";
-            }
+//            if (!empty($parametros)) {
+//                $sql = "SELECT * FROM servico where cd_servico =  " . $parametros;
+//            } else {
+//            }
+            $sql = "SELECT * FROM USUARIO";
 
-            $sql = $con->prepare($sql);
-            $sql->execute();
+            $con = Conexao::prepare($sql);
+
+            $con->execute();
+
 
             $resultados = array();
             $i = 0;
 
-            while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+            while ($row = $con->fetch(PDO::FETCH_ASSOC)) {
                 foreach ($row as $key => &$r) {
                     $r = utf8_encode($r);
                 }
