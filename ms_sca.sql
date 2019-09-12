@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 02/09/2019 às 23:37
+-- Tempo de geração: 12/09/2019 às 18:47
 -- Versão do servidor: 5.7.27-0ubuntu0.18.04.1
 -- Versão do PHP: 7.2.19-0ubuntu0.18.04.2
 
@@ -107,7 +107,8 @@ CREATE TABLE `USUARIO` (
 --
 
 INSERT INTO `USUARIO` (`ID`, `NOME`, `IDENTIDADE`, `CPF`, `ENDERECO`, `SENHA`) VALUES
-(1, 'Jose pereira', '123456', NULL, NULL, '456');
+(1, 'Jose pereira', '123456', NULL, NULL, '456'),
+(2, 'Fabio Silveira', '12345', NULL, NULL, '456');
 
 -- --------------------------------------------------------
 
@@ -125,7 +126,8 @@ CREATE TABLE `USUARIO_PERFIL` (
 --
 
 INSERT INTO `USUARIO_PERFIL` (`USUARIO_ID`, `PERFIL_ID`) VALUES
-(1, 3);
+(1, 3),
+(1, 4);
 
 -- --------------------------------------------------------
 
@@ -200,7 +202,7 @@ ALTER TABLE `USUARIO_SISTEMA`
 -- AUTO_INCREMENT de tabela `PERFIL`
 --
 ALTER TABLE `PERFIL`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `SISTEMA`
@@ -212,7 +214,7 @@ ALTER TABLE `SISTEMA`
 -- AUTO_INCREMENT de tabela `USUARIO`
 --
 ALTER TABLE `USUARIO`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restrições para dumps de tabelas
