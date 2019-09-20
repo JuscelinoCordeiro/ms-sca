@@ -4,7 +4,7 @@
 
     class Usuarios extends Conexao {
 
-        public function cadatrarUsuario($usuario) {
+        public function cadastrarUsuario($usuario) {
 
             $sql1 = "INSERT INTO USUARIO (NOME, IDENTIDADE, SENHA) VALUES (:nome, :idt, :senha)";
             $exec = Conexao::prepare($sql1);
@@ -13,18 +13,23 @@
             $exec->bindValue(':senha', $usuario->senha);
             $result1 = $exec->execute();
 
-            if ($result1) {
-                $sql2 = "SELECT MAX(ID) FROM USUARIO";
-                $exec = Conexao::prepare($sql2);
-                $exec->execute();
-                $usuario_id = $exec->fetch();
-                print_r($usuario_id);
-            }
-            die('pausado');
-            $sql3 = "INSERT INTO USUARIO_PERFIL (NOME, IDENTIDADE, SENHA) VALUES (:nome, :idt, :senha)";
+//            if ($result1) {
+            $sql2 = "SELECT MAX(ID) ID FROM USUARIO";
+            $exec = Conexao::prepare($sql2);
+            $exec->execute();
+            $usuario_id = $exec->fetch(PDO::FETCH_OBJ);
+            print_r($usuario_id);
+//            }
+//            die('pausado');
+            $sql3 = "INSERT INTO USUARIO_PERFIL (USUARIO_ID, PERFIL_ID)  VALUES (:usuario_id, :perfil_id)";
+            $exec = Conexao::prepare($sql3);
+            $exec->bindValue(':usuario_id', $usuario_id->ID);
+            $exec->bindValue(':perfil_id', $usuario->perfil);
+            $result3 = $exec->execute();
 
             Conexao::fechar();
-            return $exec->fetch();
+//            return $exec->fetch();
+            return TRUE;
         }
 
         public function existeUsuario($usuario) {
