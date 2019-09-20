@@ -4,6 +4,29 @@
 
     class Usuarios extends Conexao {
 
+        public function cadatrarUsuario($usuario) {
+
+            $sql1 = "INSERT INTO USUARIO (NOME, IDENTIDADE, SENHA) VALUES (:nome, :idt, :senha)";
+            $exec = Conexao::prepare($sql1);
+            $exec->bindValue(':nome', $usuario->nome);
+            $exec->bindValue(':idt', $usuario->identidade);
+            $exec->bindValue(':senha', $usuario->senha);
+            $result1 = $exec->execute();
+
+            if ($result1) {
+                $sql2 = "SELECT MAX(ID) FROM USUARIO";
+                $exec = Conexao::prepare($sql2);
+                $exec->execute();
+                $usuario_id = $exec->fetch();
+                print_r($usuario_id);
+            }
+            die('pausado');
+            $sql3 = "INSERT INTO USUARIO_PERFIL (NOME, IDENTIDADE, SENHA) VALUES (:nome, :idt, :senha)";
+
+            Conexao::fechar();
+            return $exec->fetch();
+        }
+
         public function existeUsuario($usuario) {
 
             $sql = "SELECT ID FROM USUARIO WHERE IDENTIDADE = :idt and SENHA = :senha";
