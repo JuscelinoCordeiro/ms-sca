@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 19-Set-2019 às 13:56
+-- Tempo de geração: 23/09/2019 às 19:31
 -- Versão do servidor: 5.7.27-0ubuntu0.18.04.1
--- PHP Version: 7.2.19-0ubuntu0.18.04.2
+-- Versão do PHP: 7.2.19-0ubuntu0.18.04.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ms_sca`
+-- Banco de dados: `ms_sca`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `PERFIL`
+-- Estrutura para tabela `PERFIL`
 --
 
 CREATE TABLE `PERFIL` (
@@ -33,7 +35,7 @@ CREATE TABLE `PERFIL` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `PERFIL`
+-- Despejando dados para a tabela `PERFIL`
 --
 
 INSERT INTO `PERFIL` (`ID`, `PERFIL`, `DESCRICAO`) VALUES
@@ -46,7 +48,7 @@ INSERT INTO `PERFIL` (`ID`, `PERFIL`, `DESCRICAO`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `PERFIL_SISTEMA`
+-- Estrutura para tabela `PERFIL_SISTEMA`
 --
 
 CREATE TABLE `PERFIL_SISTEMA` (
@@ -56,7 +58,7 @@ CREATE TABLE `PERFIL_SISTEMA` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `PERFIL_SISTEMA`
+-- Despejando dados para a tabela `PERFIL_SISTEMA`
 --
 
 INSERT INTO `PERFIL_SISTEMA` (`PERFIL_ID`, `SISTEMA_ID`, `ATIVO`) VALUES
@@ -68,7 +70,7 @@ INSERT INTO `PERFIL_SISTEMA` (`PERFIL_ID`, `SISTEMA_ID`, `ATIVO`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `SISTEMA`
+-- Estrutura para tabela `SISTEMA`
 --
 
 CREATE TABLE `SISTEMA` (
@@ -79,17 +81,17 @@ CREATE TABLE `SISTEMA` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `SISTEMA`
+-- Despejando dados para a tabela `SISTEMA`
 --
 
 INSERT INTO `SISTEMA` (`ID`, `SISTEMA`, `ATIVO`, `DESCRICAO`) VALUES
 (1, 'NETCAR', 1, 'Sistema de Gerenciamento de Lava Jato'),
-(2, 'SISGEDOC', 0, 'Sistema de Gerenciamento de Documentos');
+(2, 'SISGEDOC', 1, 'Sistema de Gerenciamento de Documentos');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `USUARIO`
+-- Estrutura para tabela `USUARIO`
 --
 
 CREATE TABLE `USUARIO` (
@@ -102,17 +104,21 @@ CREATE TABLE `USUARIO` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `USUARIO`
+-- Despejando dados para a tabela `USUARIO`
 --
 
 INSERT INTO `USUARIO` (`ID`, `NOME`, `IDENTIDADE`, `CPF`, `ENDERECO`, `SENHA`) VALUES
-(1, 'Jose pereira', '123456', NULL, NULL, '456'),
-(2, 'Fabio Silveira', '12345', NULL, NULL, '456');
+(1, 'Jose pereira', '123456', NULL, NULL, '51eac6b471a284d3341d8c0c63d0f1a286262a18'),
+(18, 'Manoel Souza', '123', NULL, NULL, '51eac6b471a284d3341d8c0c63d0f1a286262a18'),
+(19, 'Joaquim', '1234', NULL, NULL, '51eac6b471a284d3341d8c0c63d0f1a286262a18'),
+(20, 'Lorena Rocco', '12345', NULL, NULL, '51eac6b471a284d3341d8c0c63d0f1a286262a18'),
+(24, NULL, '1234567', NULL, NULL, '51eac6b471a284d3341d8c0c63d0f1a286262a18'),
+(25, 'Florencio', '1234567', NULL, NULL, '51eac6b471a284d3341d8c0c63d0f1a286262a18');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `USUARIO_PERFIL`
+-- Estrutura para tabela `USUARIO_PERFIL`
 --
 
 CREATE TABLE `USUARIO_PERFIL` (
@@ -121,17 +127,21 @@ CREATE TABLE `USUARIO_PERFIL` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `USUARIO_PERFIL`
+-- Despejando dados para a tabela `USUARIO_PERFIL`
 --
 
 INSERT INTO `USUARIO_PERFIL` (`USUARIO_ID`, `PERFIL_ID`) VALUES
+(19, 1),
+(20, 2),
+(25, 2),
 (1, 3),
-(1, 4);
+(1, 4),
+(18, 10);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `USUARIO_SISTEMA`
+-- Estrutura para tabela `USUARIO_SISTEMA`
 --
 
 CREATE TABLE `USUARIO_SISTEMA` (
@@ -141,24 +151,28 @@ CREATE TABLE `USUARIO_SISTEMA` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `USUARIO_SISTEMA`
+-- Despejando dados para a tabela `USUARIO_SISTEMA`
 --
 
 INSERT INTO `USUARIO_SISTEMA` (`USUARIO_ID`, `SISTEMA_ID`, `ATIVO`) VALUES
-(1, 1, 1);
+(1, 1, 1),
+(18, 1, 1),
+(19, 1, 1),
+(20, 1, 1),
+(25, 1, 1);
 
 --
--- Indexes for dumped tables
+-- Índices de tabelas apagadas
 --
 
 --
--- Indexes for table `PERFIL`
+-- Índices de tabela `PERFIL`
 --
 ALTER TABLE `PERFIL`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `PERFIL_SISTEMA`
+-- Índices de tabela `PERFIL_SISTEMA`
 --
 ALTER TABLE `PERFIL_SISTEMA`
   ADD PRIMARY KEY (`PERFIL_ID`,`SISTEMA_ID`),
@@ -166,19 +180,19 @@ ALTER TABLE `PERFIL_SISTEMA`
   ADD KEY `fk_PERFIL_has_SISTEMA_PERFIL1_idx` (`PERFIL_ID`);
 
 --
--- Indexes for table `SISTEMA`
+-- Índices de tabela `SISTEMA`
 --
 ALTER TABLE `SISTEMA`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `USUARIO`
+-- Índices de tabela `USUARIO`
 --
 ALTER TABLE `USUARIO`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `USUARIO_PERFIL`
+-- Índices de tabela `USUARIO_PERFIL`
 --
 ALTER TABLE `USUARIO_PERFIL`
   ADD PRIMARY KEY (`USUARIO_ID`,`PERFIL_ID`),
@@ -186,7 +200,7 @@ ALTER TABLE `USUARIO_PERFIL`
   ADD KEY `fk_USUARIO_has_PERFIL_USUARIO1_idx` (`USUARIO_ID`);
 
 --
--- Indexes for table `USUARIO_SISTEMA`
+-- Índices de tabela `USUARIO_SISTEMA`
 --
 ALTER TABLE `USUARIO_SISTEMA`
   ADD PRIMARY KEY (`USUARIO_ID`,`SISTEMA_ID`),
@@ -194,48 +208,52 @@ ALTER TABLE `USUARIO_SISTEMA`
   ADD KEY `fk_USUARIO_has_SISTEMA_USUARIO_idx` (`USUARIO_ID`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de tabelas apagadas
 --
 
 --
--- AUTO_INCREMENT for table `PERFIL`
+-- AUTO_INCREMENT de tabela `PERFIL`
 --
 ALTER TABLE `PERFIL`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
--- AUTO_INCREMENT for table `SISTEMA`
+-- AUTO_INCREMENT de tabela `SISTEMA`
 --
 ALTER TABLE `SISTEMA`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- AUTO_INCREMENT for table `USUARIO`
+-- AUTO_INCREMENT de tabela `USUARIO`
 --
 ALTER TABLE `USUARIO`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
 --
--- Constraints for dumped tables
+-- Restrições para dumps de tabelas
 --
 
 --
--- Limitadores para a tabela `PERFIL_SISTEMA`
+-- Restrições para tabelas `PERFIL_SISTEMA`
 --
 ALTER TABLE `PERFIL_SISTEMA`
   ADD CONSTRAINT `fk_PERFIL_has_SISTEMA_PERFIL1` FOREIGN KEY (`PERFIL_ID`) REFERENCES `PERFIL` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_PERFIL_has_SISTEMA_SISTEMA1` FOREIGN KEY (`SISTEMA_ID`) REFERENCES `SISTEMA` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `USUARIO_PERFIL`
+-- Restrições para tabelas `USUARIO_PERFIL`
 --
 ALTER TABLE `USUARIO_PERFIL`
   ADD CONSTRAINT `fk_USUARIO_has_PERFIL_PERFIL1` FOREIGN KEY (`PERFIL_ID`) REFERENCES `PERFIL` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_USUARIO_has_PERFIL_USUARIO1` FOREIGN KEY (`USUARIO_ID`) REFERENCES `USUARIO` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `USUARIO_SISTEMA`
+-- Restrições para tabelas `USUARIO_SISTEMA`
 --
 ALTER TABLE `USUARIO_SISTEMA`
   ADD CONSTRAINT `fk_USUARIO_has_SISTEMA_SISTEMA1` FOREIGN KEY (`SISTEMA_ID`) REFERENCES `SISTEMA` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_USUARIO_has_SISTEMA_USUARIO` FOREIGN KEY (`USUARIO_ID`) REFERENCES `USUARIO` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

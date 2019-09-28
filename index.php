@@ -9,12 +9,12 @@
 
         public static function open($requisicao) {
 
-            $url = explode('/', $requisicao['url']);
+            @$url = explode('/', $requisicao['url']);
 
-            $classe = ucfirst($url[0]);
+            @$classe = ucfirst($url[0]);
             array_shift($url);
 
-            $metodo = $url[0];
+            @$metodo = $url[0];
             array_shift($url);
 
             $json = file_get_contents('php://input');
