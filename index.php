@@ -1,9 +1,11 @@
 <?php
 
-//    header('Content-Type: application/json; charset=UTF-8', TRUE);
-
-    require_once 'classes/Servicos.php';
     require_once 'classes/Usuarios.php';
+    require_once 'classes/Sistemas.php';
+
+    if (isset($_REQUEST)) {
+        echo Rest::open($_REQUEST);
+    }
 
     class Rest {
 
@@ -38,7 +40,4 @@
 
     }
 
-    if (isset($_REQUEST)) {
-        echo Rest::open($_REQUEST);
-    }
 ?>

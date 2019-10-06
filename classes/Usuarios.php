@@ -13,14 +13,11 @@
             $exec->bindValue(':senha', $usuario->senha);
             $result1 = $exec->execute();
 
-//            if ($result1) {
             $sql2 = "SELECT MAX(ID) ID FROM USUARIO";
             $exec2 = Conexao::prepare($sql2);
             $exec2->execute();
             $usuario_id = $exec2->fetch(PDO::FETCH_OBJ);
-//            print_r($usuario_id);
-////            }
-//            die('pausado');
+
             $sql3 = "INSERT INTO USUARIO_PERFIL (USUARIO_ID, PERFIL_ID)  VALUES (:usuario_id, :perfil_id)";
             $exec3 = Conexao::prepare($sql3);
             $exec3->bindValue(':usuario_id', $usuario_id->ID);
@@ -35,7 +32,6 @@
             $result4 = $exec4->execute();
 
             Conexao::fechar();
-//            return $exec->fetch();
             return TRUE;
         }
 
@@ -138,43 +134,6 @@
             return $exec->fetchAll();
         }
 
-//
-//        //=========================================
-//        public function autenticar($parametros) {
-//            $con = new PDO('mysql: host=locahost; dbname=ms_sca;', 'dimitri', '@!@#rf');
-//
-////            VERIFICAR PERFIL DO USUARIO NO SISTEMA
-//
-//            if (!empty($parametros)) {
-////                $sql = "SELECT ID FROM USUARIO IDT = $parametros[0]  AND SENHA = $parametros[1]";
-//                $sql = "SELECT ID FROM USUARIO IDT = '123456'  AND SENHA = '456'";
-//            }
-//            echo $sql;
-//
-//            $sql = $con->prepare($sql);
-//            $sql->execute();
-//
-//            $id = $sql->fetchObject();
-//            print_r($id);
-//            die();
-//
-//            $resultados = array();
-//            $i = 0;
-//
-//            while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-//                foreach ($row as $key => &$r) {
-//                    $r = utf8_encode($r);
-//                }
-//
-//                $resultados[] = $row;
-//            }
-//            unset($r);
-//
-//            if (!$resultados) {
-//                throw new Exception("Nenhum servico disponível!");
-//            }
-//
-//            $con = NULL;
-////            return $resultados;
-//        }
     }
+
+?>
