@@ -1,2 +1,2 @@
 # ms-servicos
-Projeto de api em php para microsserviços
+Projeto de um microsserviço para controle de acesso à sistemas.
