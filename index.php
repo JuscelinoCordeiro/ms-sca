@@ -22,6 +22,9 @@
             $json = file_get_contents('php://input');
             $parametros = isset($json) ? json_decode($json) : '';
 
+//            print_r($parametros);
+//            die();
+
             try {
                 if (class_exists($classe)) {
                     if (method_exists($classe, $metodo)) {
