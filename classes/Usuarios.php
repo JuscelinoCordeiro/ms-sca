@@ -69,10 +69,9 @@
 
         public function existeUsuario($usuario) {
 
-            $sql = "SELECT ID FROM USUARIO WHERE IDENTIDADE = :idt and SENHA = :senha";
+            $sql = "SELECT ID FROM USUARIO WHERE IDENTIDADE = :idt";
             $exec = Conexao::prepare($sql);
             $exec->bindValue(':idt', $usuario->identidade);
-            $exec->bindValue(':senha', $usuario->senha);
             $exec->execute();
             $dados = $exec->fetch();
 
@@ -173,6 +172,34 @@
 
             Conexao::fechar();
             return $dados;
+        }
+
+        public function editarPerfil($dados) {
+            Conexao::iniciarTransacao();
+
+            $sql = "SELECT ID FROM USUARIO WHERE IDENTIDADE = :idt";
+            $exec = Conexao::prepare($sql);
+            $exec->bindValue(':idt', $dados->identidade);
+            $exec->execute();
+            $usuario_id = $exec->fetch(PDO::FETCH_OBJ);
+
+            $sql2 = "UPDATE USUARIO_PERFIL SET PERFIL_ID = :perfil_id WHERE USUARIO_ID = :usuario_id AND SISTEMA_ID = :sistema_id";
+            $exec2 = Conexao::prepare($sql2);
+            $exec2->bindValue(':usuario_id', $usuario_id->ID);
+            $exec2->bindValue(':perfil_id', $dados->perfil);
+            $exec2->bindValue(':sistema_id', $dados->sistema_id);
+            $result = $exec2->execute();
+
+            $retorno = ($exec2->rowCount() > 0) ? TRUE : FALSE;
+
+            if ($retorno) {
+                Conexao::commit();
+            } else {
+                Conexao::rollback();
+            }
+
+            Conexao::fechar();
+            return $retorno;
         }
 
         public function getUsuario($dados) {
